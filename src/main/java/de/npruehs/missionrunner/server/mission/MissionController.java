@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class MissionController {
 	@RequestMapping("/missions/get")
 	public Mission[] get(@RequestParam(value = "accountId") String accountId) {
-		String[] requirements = new String[2];
-		requirements[0] = "A";
-		requirements[1] = "B";
+		MissionRequirement[] requirements = new MissionRequirement[2];
+		requirements[0] = new MissionRequirement("A", 2);
+		requirements[1] = new MissionRequirement("B", 1);
 		
 		Mission[] missions = new Mission[2];
 		missions[0] = new Mission(0, accountId, "TestMissionA", MissionStatus.OPEN, requirements, 10, 100);

@@ -9,13 +9,13 @@ public class Mission {
 
     private final MissionStatus status;
 
-    private final String[] requirements;
+    private final MissionRequirement[] requirements;
 
     private final int requiredTime;
 
     private final int reward;
     
-    public Mission(int id, String accountId, String name, MissionStatus status, String[] requirements, int requiredTime, int reward) {
+    public Mission(int id, String accountId, String name, MissionStatus status, MissionRequirement[] requirements, int requiredTime, int reward) {
     	this.id = id;
     	this.accountId = accountId;
     	this.name = name;
@@ -41,7 +41,7 @@ public class Mission {
 		return status;
 	}
 
-	public String[] getRequirements() {
+	public MissionRequirement[] getRequirements() {
 		return requirements;
 	}
 
