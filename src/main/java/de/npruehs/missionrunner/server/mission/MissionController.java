@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import de.npruehs.missionrunner.server.NetworkResponse;
 import de.npruehs.missionrunner.server.character.CharacterStatus;
+import de.npruehs.missionrunner.server.mission.net.FinishMissionRequest;
+import de.npruehs.missionrunner.server.mission.net.FinishMissionResponse;
 import de.npruehs.missionrunner.server.mission.net.StartMissionRequest;
 import de.npruehs.missionrunner.server.mission.net.StartMissionResponse;
 
@@ -54,6 +56,35 @@ public class MissionController {
 		response.setMission(mission);
 		response.setCharacters(characters);
 		
+		return NetworkResponse.newSuccessResponse(response);
+	}
+	
+	@PostMapping("/missions/finish")
+	public NetworkResponse<FinishMissionResponse> start(@RequestBody FinishMissionRequest request) {
+		if (request == null) {
+			return NetworkResponse.newErrorResponse(ERROR_BAD_REQUEST, "Bad Request");
+		}
+		
+		FinishMissionResponse.AccountUpdate account = new FinishMissionResponse.AccountUpdate();
+		account.setLevel(4);
+		account.setScore(1500);
+		
+		MissionRequirement[] requirements = new MissionRequirement[2];
+		requirements[0] = new MissionRequirement("A", 3);
+		requirements[1] = new MissionRequirement("B", 2);
+		
+		Mission[] newMissions = new Mission[2];
+		newMissions[0] = new Mission(2, request.getAccountId(), "TestMissionC", MissionStatus.OPEN, requirements, 20, 20, 200);
+		newMissions[1] = new Mission(3, request.getAccountId(), "TestMissionD", MissionStatus.OPEN, requirements, 20, 20, 200);
+		
+		FinishMissionResponse.MissionUpdate missions = new FinishMissionResponse.MissionUpdate();
+		missions.setRemovedMissions(new int[] { request.getMissionId() });
+		missions.setAddedMissions(newMissions);
+
+		FinishMissionResponse response = new FinishMissionResponse();
+		response.setAccount(account);
+		response.setMissions(missions);
+
 		return NetworkResponse.newSuccessResponse(response);
 	}
 }
