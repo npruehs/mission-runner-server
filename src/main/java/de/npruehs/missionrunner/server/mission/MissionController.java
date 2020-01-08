@@ -22,8 +22,8 @@ public class MissionController {
 		requirements[1] = new MissionRequirement("B", 1);
 		
 		Mission[] missions = new Mission[2];
-		missions[0] = new Mission(0, accountId, "TestMissionA", MissionStatus.OPEN, requirements, 10, 100);
-		missions[1] = new Mission(1, accountId, "TestMissionB", MissionStatus.OPEN, requirements, 10, 100);
+		missions[0] = new Mission(0, accountId, "TestMissionA", MissionStatus.OPEN, requirements, 10, 10, 100);
+		missions[1] = new Mission(1, accountId, "TestMissionB", MissionStatus.OPEN, requirements, 10, 10, 100);
 		
 		return missions;
 	}
