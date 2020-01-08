@@ -36,6 +36,8 @@ public class MissionController {
 			return NetworkResponse.newErrorResponse(ERROR_BAD_REQUEST, "Bad Request");
 		}
 		
+		// TODO(np): Check if requirements are met.
+		
 		StartMissionResponse.MissionUpdate mission = new StartMissionResponse.MissionUpdate();
 		mission.setId(request.getMissionId());
 		mission.setStatus(MissionStatus.RUNNING);
@@ -64,6 +66,8 @@ public class MissionController {
 		if (request == null) {
 			return NetworkResponse.newErrorResponse(ERROR_BAD_REQUEST, "Bad Request");
 		}
+		
+		// TODO(np): Check if mission is actually finished.
 		
 		FinishMissionResponse.AccountUpdate account = new FinishMissionResponse.AccountUpdate();
 		account.setLevel(4);
