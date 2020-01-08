@@ -81,10 +81,21 @@ public class MissionController {
 		missions.setRemovedMissions(new int[] { request.getMissionId() });
 		missions.setAddedMissions(newMissions);
 
+		FinishMissionResponse.CharacterUpdate[] characters = new FinishMissionResponse.CharacterUpdate[2];
+		
+		for (int i = 0; i < 2; ++i) {
+			FinishMissionResponse.CharacterUpdate character = new FinishMissionResponse.CharacterUpdate();
+			character.setId(i);
+			character.setMissionId(0);
+			character.setStatus(CharacterStatus.IDLE);
+			characters[i] = character;
+		}
+		
 		FinishMissionResponse response = new FinishMissionResponse();
 		response.setAccount(account);
 		response.setMissions(missions);
-
+		response.setCharacters(characters);
+		
 		return NetworkResponse.newSuccessResponse(response);
 	}
 }
