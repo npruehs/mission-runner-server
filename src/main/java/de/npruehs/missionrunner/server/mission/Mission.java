@@ -9,19 +9,22 @@ public class Mission {
 
     private final MissionStatus status;
 
-    private final String[] requirements;
+    private final MissionRequirement[] requirements;
 
     private final int requiredTime;
 
+    private final int remainingTime;
+    
     private final int reward;
     
-    public Mission(int id, String accountId, String name, MissionStatus status, String[] requirements, int requiredTime, int reward) {
+    public Mission(int id, String accountId, String name, MissionStatus status, MissionRequirement[] requirements, int requiredTime, int remainingTime, int reward) {
     	this.id = id;
     	this.accountId = accountId;
     	this.name = name;
     	this.status = status;
     	this.requirements = requirements;
     	this.requiredTime = requiredTime;
+    	this.remainingTime = remainingTime;
     	this.reward = reward;
     }
 
@@ -41,12 +44,17 @@ public class Mission {
 		return status;
 	}
 
-	public String[] getRequirements() {
+	public MissionRequirement[] getRequirements() {
 		return requirements;
 	}
 
 	public int getRequiredTime() {
 		return requiredTime;
+	}
+
+	
+	public int getRemainingTime() {
+		return remainingTime;
 	}
 
 	public int getReward() {
