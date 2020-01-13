@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import de.npruehs.missionrunner.server.NetworkResponse;
+import de.npruehs.missionrunner.server.character.Character;
+import de.npruehs.missionrunner.server.character.CharacterSkill;
 import de.npruehs.missionrunner.server.character.CharacterStatus;
 import de.npruehs.missionrunner.server.mission.net.FinishMissionRequest;
 import de.npruehs.missionrunner.server.mission.net.FinishMissionResponse;
@@ -85,7 +87,7 @@ public class MissionController {
 		missions.setRemovedMissions(new int[] { request.getMissionId() });
 		missions.setAddedMissions(newMissions);
 
-		FinishMissionResponse.CharacterUpdate[] characters = new FinishMissionResponse.CharacterUpdate[2];
+		FinishMissionResponse.CharacterUpdate[] characters = new FinishMissionResponse.CharacterUpdate[3];
 		
 		for (int i = 0; i < 2; ++i) {
 			FinishMissionResponse.CharacterUpdate character = new FinishMissionResponse.CharacterUpdate();
@@ -95,6 +97,17 @@ public class MissionController {
 			characters[i] = character;
 		}
 		
+		// Add new unlocked character.
+		CharacterSkill[] skills = new CharacterSkill[1];
+		skills[0] = new CharacterSkill("C", 1);
+		
+		characters[2] = new FinishMissionResponse.CharacterUpdate();
+		characters[2].setId(2);
+		characters[2].setName("TestCharacterC");
+		characters[2].setStatus(CharacterStatus.IDLE);
+		characters[2].setMissionId(0);
+		characters[2].setSkills(skills);
+
 		FinishMissionResponse response = new FinishMissionResponse();
 		response.setAccount(account);
 		response.setMissions(missions);
