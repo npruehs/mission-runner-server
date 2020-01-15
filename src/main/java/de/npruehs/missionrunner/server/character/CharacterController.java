@@ -1,12 +1,12 @@
 package de.npruehs.missionrunner.server.character;
 
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class CharacterController {
-	@RequestMapping("/characters/get")
+	@GetMapping("/characters/get")
 	public Character[] get(@RequestParam(value = "accountId") String accountId) {
 		CharacterSkill[] skills = new CharacterSkill[2];
 		skills[0] = new CharacterSkill("A", 1);

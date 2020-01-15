@@ -6,7 +6,7 @@ import java.util.Random;
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,7 +22,7 @@ public class AccountController {
 		random = new Random();
 	}
 	
-	@RequestMapping("/account/get")
+	@GetMapping("/account/get")
 	public Account get(@RequestParam(value = "id") String id) {
 		// Check if account exists.
 		Optional<Account> existingAccount = repository.findById(id);
