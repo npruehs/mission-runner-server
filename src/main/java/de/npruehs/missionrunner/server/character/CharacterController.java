@@ -1,21 +1,40 @@
 package de.npruehs.missionrunner.server.character;
 
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.google.common.collect.Iterables;
+
+import de.npruehs.missionrunner.server.ErrorCode;
+import de.npruehs.missionrunner.server.NetworkResponse;
+import de.npruehs.missionrunner.server.account.Account;
+import de.npruehs.missionrunner.server.account.AccountRepository;
+
 @RestController
 public class CharacterController {
+	@Autowired
+	private AccountRepository accountRepository;
+	
+	@Autowired
+	private CharacterRepository characterRepository;
+	
+	
 	@GetMapping("/characters/get")
-	public Character[] get(@RequestParam(value = "accountId") String accountId) {
-		CharacterSkill[] skills = new CharacterSkill[2];
-		skills[0] = new CharacterSkill("A", 1);
-		skills[1] = new CharacterSkill("B", 1);
+	public NetworkResponse<Character[]> get(@RequestParam(value = "accountId") String accountId) {
+		Optional<Account> account = accountRepository.findById(accountId);
 		
-		Character[] characters = new Character[2];
-		characters[0] = new Character(0, accountId, "TestCharacterA", CharacterStatus.IDLE, 0, skills);
-		characters[1] = new Character(1, accountId, "TestCharacterB", CharacterStatus.IDLE, 0, skills);
+		if (!account.isPresent()) {
+			return NetworkResponse.newErrorResponse(ErrorCode.ACCOUNT_NOT_FOUND, "Account not found.");
+		}
 		
-		return characters;
+		List<Character> characters = characterRepository.findByAccount(account.get());
+		Character[] characterArray = Iterables.toArray(characters, Character.class);
+		
+		return NetworkResponse.newSuccessResponse(characterArray);
 	}
 }

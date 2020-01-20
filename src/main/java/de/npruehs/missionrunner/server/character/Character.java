@@ -1,22 +1,35 @@
 package de.npruehs.missionrunner.server.character;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+import de.npruehs.missionrunner.server.account.Account;
+
+@Entity
 public class Character {
-    private final int id;
+	@Id
+	@GeneratedValue
+    private int id;
 
-    private final String accountId;
+    @ManyToOne
+    private Account account;
 
-    private final String name;
+    private String name;
 
-    private final CharacterStatus status;
+    private CharacterStatus status;
 
-    private final int missionId;
+    private int missionId;
 
-    private final CharacterSkill[] skills;
+    private CharacterSkill[] skills;
 
-	public Character(int id, String accountId, String name, CharacterStatus status, int missionId,
+    public Character() {
+    }
+    
+	public Character(Account account, String name, CharacterStatus status, int missionId,
 			CharacterSkill[] skills) {
-		this.id = id;
-		this.accountId = accountId;
+		this.account = account;
 		this.name = name;
 		this.status = status;
 		this.missionId = missionId;
@@ -27,8 +40,8 @@ public class Character {
 		return id;
 	}
 
-	public String getAccountId() {
-		return accountId;
+	public Account getAccount() {
+		return account;
 	}
 
 	public String getName() {
@@ -45,5 +58,29 @@ public class Character {
 
 	public CharacterSkill[] getSkills() {
 		return skills;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public void setAccount(Account account) {
+		this.account = account;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setStatus(CharacterStatus status) {
+		this.status = status;
+	}
+
+	public void setMissionId(int missionId) {
+		this.missionId = missionId;
+	}
+
+	public void setSkills(CharacterSkill[] skills) {
+		this.skills = skills;
 	}
 }

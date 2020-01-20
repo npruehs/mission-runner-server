@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import de.npruehs.missionrunner.server.ErrorCode;
 import de.npruehs.missionrunner.server.NetworkResponse;
-import de.npruehs.missionrunner.server.character.Character;
 import de.npruehs.missionrunner.server.character.CharacterSkill;
 import de.npruehs.missionrunner.server.character.CharacterStatus;
 import de.npruehs.missionrunner.server.mission.net.FinishMissionRequest;
@@ -17,8 +17,6 @@ import de.npruehs.missionrunner.server.mission.net.StartMissionResponse;
 
 @RestController
 public class MissionController {
-	private static int ERROR_BAD_REQUEST = 1;
-	
 	@GetMapping("/missions/get")
 	public Mission[] get(@RequestParam(value = "accountId") String accountId) {
 		MissionRequirement[] requirements = new MissionRequirement[2];
@@ -35,7 +33,7 @@ public class MissionController {
 	@PostMapping("/missions/start")
 	public NetworkResponse<StartMissionResponse> start(@RequestBody StartMissionRequest request) {
 		if (request == null) {
-			return NetworkResponse.newErrorResponse(ERROR_BAD_REQUEST, "Bad Request");
+			return NetworkResponse.newErrorResponse(ErrorCode.BAD_REQUEST, "Bad Request");
 		}
 		
 		// TODO(np): Check if requirements are met.
@@ -66,7 +64,7 @@ public class MissionController {
 	@PostMapping("/missions/finish")
 	public NetworkResponse<FinishMissionResponse> start(@RequestBody FinishMissionRequest request) {
 		if (request == null) {
-			return NetworkResponse.newErrorResponse(ERROR_BAD_REQUEST, "Bad Request");
+			return NetworkResponse.newErrorResponse(ErrorCode.BAD_REQUEST, "Bad Request");
 		}
 		
 		// TODO(np): Check if mission is actually finished.

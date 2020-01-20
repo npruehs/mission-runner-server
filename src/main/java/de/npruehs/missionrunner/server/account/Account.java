@@ -1,12 +1,21 @@
 package de.npruehs.missionrunner.server.account;
 
+import java.util.Collection;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+import de.npruehs.missionrunner.server.character.Character;
 
 @Entity
 public class Account {
 	@Id
 	private String id;
+	
+	@OneToMany(mappedBy="account")
+	private Collection<Character> characters;
+	
 	private String name;
 	private int level;
 	private int score;
@@ -29,6 +38,14 @@ public class Account {
 		this.id = id;
 	}
 
+	public Collection<Character> getCharacters() {
+		return characters;
+	}
+
+	public void setCharacters(Collection<Character> characters) {
+		this.characters = characters;
+	}
+	
 	public String getName() {
 		return name;
 	}
