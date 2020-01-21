@@ -7,6 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import de.npruehs.missionrunner.server.character.Character;
+import de.npruehs.missionrunner.server.mission.Mission;
 
 @Entity
 public class Account {
@@ -15,6 +16,9 @@ public class Account {
 	
 	@OneToMany(mappedBy="account")
 	private Collection<Character> characters;
+	
+	@OneToMany(mappedBy="account")
+	private Collection<Mission> missions;
 	
 	private String name;
 	private int level;
@@ -46,6 +50,14 @@ public class Account {
 		this.characters = characters;
 	}
 	
+	public Collection<Mission> getMissions() {
+		return missions;
+	}
+
+	public void setMissions(Collection<Mission> missions) {
+		this.missions = missions;
+	}
+
 	public String getName() {
 		return name;
 	}

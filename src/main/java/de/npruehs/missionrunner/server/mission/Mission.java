@@ -1,39 +1,57 @@
 package de.npruehs.missionrunner.server.mission;
 
+import java.sql.Timestamp;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+import de.npruehs.missionrunner.server.account.Account;
+
+@Entity
 public class Mission {
-	private final int id;
+	@Id
+	@GeneratedValue
+	private long id;
 
-    private final String accountId;
+	@ManyToOne
+    private Account account;
 
-    private final String name;
+    private String name;
 
-    private final MissionStatus status;
+    private MissionStatus status;
 
-    private final MissionRequirement[] requirements;
+    private MissionRequirement[] requirements;
 
-    private final int requiredTime;
+    private int requiredTime;
 
-    private final int remainingTime;
+    private Timestamp startTime;
     
-    private final int reward;
+    private int remainingTime;
     
-    public Mission(int id, String accountId, String name, MissionStatus status, MissionRequirement[] requirements, int requiredTime, int remainingTime, int reward) {
-    	this.id = id;
-    	this.accountId = accountId;
+    private int reward;
+    
+    public Mission() {
+    }
+    
+    public Mission(Account account, String name, MissionRequirement[] requirements, int requiredTime, int reward) {
+    	this.account = account;
     	this.name = name;
-    	this.status = status;
     	this.requirements = requirements;
     	this.requiredTime = requiredTime;
-    	this.remainingTime = remainingTime;
     	this.reward = reward;
+    	
+    	this.status = MissionStatus.OPEN;
+    	this.remainingTime = this.requiredTime;
     }
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public String getAccountId() {
-		return accountId;
+	public Account getAccount() {
+		return account;
 	}
 
 	public String getName() {
@@ -52,12 +70,51 @@ public class Mission {
 		return requiredTime;
 	}
 
-	
+	public Timestamp getStartTime() {
+		return startTime;
+	}
+
 	public int getRemainingTime() {
 		return remainingTime;
 	}
 
 	public int getReward() {
 		return reward;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public void setAccount(Account account) {
+		this.account = account;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setStatus(MissionStatus status) {
+		this.status = status;
+	}
+
+	public void setRequirements(MissionRequirement[] requirements) {
+		this.requirements = requirements;
+	}
+
+	public void setRequiredTime(int requiredTime) {
+		this.requiredTime = requiredTime;
+	}
+	
+	public void setStartTime(Timestamp startTime) {
+		this.startTime = startTime;
+	}
+
+	public void setRemainingTime(int remainingTime) {
+		this.remainingTime = remainingTime;
+	}
+
+	public void setReward(int reward) {
+		this.reward = reward;
 	}
 }

@@ -6,37 +6,38 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 import de.npruehs.missionrunner.server.account.Account;
+import de.npruehs.missionrunner.server.mission.Mission;
 
 @Entity
 public class Character {
 	@Id
 	@GeneratedValue
-    private int id;
+    private long id;
 
     @ManyToOne
     private Account account;
-
+    
     private String name;
 
     private CharacterStatus status;
 
-    private int missionId;
+    @ManyToOne
+    private Mission mission;
 
     private CharacterSkill[] skills;
 
     public Character() {
     }
     
-	public Character(Account account, String name, CharacterStatus status, int missionId,
-			CharacterSkill[] skills) {
+	public Character(Account account, String name, CharacterSkill[] skills) {
 		this.account = account;
 		this.name = name;
-		this.status = status;
-		this.missionId = missionId;
 		this.skills = skills;
+		
+		this.status = CharacterStatus.IDLE;
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
@@ -52,15 +53,15 @@ public class Character {
 		return status;
 	}
 
-	public int getMissionId() {
-		return missionId;
+	public Mission getMission() {
+		return mission;
 	}
 
 	public CharacterSkill[] getSkills() {
 		return skills;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -76,8 +77,8 @@ public class Character {
 		this.status = status;
 	}
 
-	public void setMissionId(int missionId) {
-		this.missionId = missionId;
+	public void setMission(Mission mission) {
+		this.mission = mission;
 	}
 
 	public void setSkills(CharacterSkill[] skills) {

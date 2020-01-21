@@ -1,5 +1,7 @@
 package de.npruehs.missionrunner.server;
 
+import java.util.Random;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -18,7 +20,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @SpringBootApplication
 @EnableSwagger2
 public class ServerApplication {
-
 	@Bean
     public Docket api() {
 		ApiInfo apiInfo = new ApiInfoBuilder()
@@ -33,6 +34,16 @@ public class ServerApplication {
         		.paths(PathSelectors.any())
         		.build();
     }
+	
+	@Bean
+	public Gameplay gameplay() {
+		return new Gameplay();
+	}
+	
+	@Bean
+	public Random random() {
+		return new Random();
+	}
 	
 	public static void main(String[] args) {
 		SpringApplication.run(ServerApplication.class, args);

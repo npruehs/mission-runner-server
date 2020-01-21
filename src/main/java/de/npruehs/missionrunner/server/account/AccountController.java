@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import de.npruehs.missionrunner.server.character.Character;
 import de.npruehs.missionrunner.server.character.CharacterSkill;
-import de.npruehs.missionrunner.server.character.CharacterStatus;
+import de.npruehs.missionrunner.server.mission.Mission;
+import de.npruehs.missionrunner.server.mission.MissionRequirement;
 
 @RestController
 public class AccountController {
@@ -45,8 +46,17 @@ public class AccountController {
 		skills[1] = new CharacterSkill("B", 1);
 		
 		Character[] characters = new Character[2];
-		characters[0] = new Character(newAccount, "TestCharacterA", CharacterStatus.IDLE, 0, skills);
-		characters[1] = new Character(newAccount, "TestCharacterB", CharacterStatus.IDLE, 0, skills);
+		characters[0] = new Character(newAccount, "TestCharacterA", skills);
+		characters[1] = new Character(newAccount, "TestCharacterB", skills);
+		
+		// Create initial missions.
+		MissionRequirement[] requirements = new MissionRequirement[2];
+		requirements[0] = new MissionRequirement("A", 2);
+		requirements[1] = new MissionRequirement("B", 1);
+		
+		Mission[] missions = new Mission[2];
+		missions[0] = new Mission(newAccount, "TestMissionA", requirements, 10, 100);
+		missions[1] = new Mission(newAccount, "TestMissionB", requirements, 10, 100);
 		
 		// Save new account.
 		newAccount = repository.save(newAccount);

@@ -33,14 +33,14 @@ public class StartMissionResponse {
     }
 
     public static class MissionUpdate {
-        private int id;
+        private long id;
         private MissionStatus status;
 
-        public int getId() {
+        public long getId() {
             return id;
         }
 
-        public void setId(int id) {
+        public void setId(long id) {
             this.id = id;
         }
 
@@ -54,15 +54,15 @@ public class StartMissionResponse {
     }
 
     public static class CharacterUpdate {
-        private int id;
+        private long id;
         private CharacterStatus status;
-        private int missionId;
+        private long missionId;
 
-        public int getId() {
+        public long getId() {
             return id;
         }
 
-        public void setId(int id) {
+        public void setId(long id) {
             this.id = id;
         }
 
@@ -74,11 +74,11 @@ public class StartMissionResponse {
             this.status = status;
         }
 
-        public int getMissionId() {
+        public long getMissionId() {
             return missionId;
         }
 
-        public void setMissionId(int missionId) {
+        public void setMissionId(long missionId) {
             this.missionId = missionId;
         }
     }

@@ -2,8 +2,8 @@ package de.npruehs.missionrunner.server.mission.net;
 
 public class StartMissionRequest {
 	private String accountId;
-    private int missionId;
-    private int[] characterIds;
+    private long missionId;
+    private Long[] characterIds;
 
     public String getAccountId() {
         return accountId;
@@ -13,19 +13,19 @@ public class StartMissionRequest {
         this.accountId = accountId;
     }
 
-    public int getMissionId() {
+    public long getMissionId() {
         return missionId;
     }
 
-    public void setMissionId(int missionId) {
+    public void setMissionId(long missionId) {
         this.missionId = missionId;
     }
 
-    public int[] getCharacterIds() {
+    public Long[] getCharacterIds() {
         return characterIds;
     }
 
-    public void setCharacterIds(int[] characterIds) {
+    public void setCharacterIds(Long[] characterIds) {
         this.characterIds = characterIds;
     }
 }

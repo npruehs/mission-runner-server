@@ -34,14 +34,14 @@ public class FinishMissionResponse {
 	}
 
 	public static class MissionUpdate {
-        private int[] removedMissions;
+        private long[] removedMissions;
         private Mission[] addedMissions;
 
-        public int[] getRemovedMissions() {
+        public long[] getRemovedMissions() {
             return removedMissions;
         }
 
-        public void setRemovedMissions(int[] removedMissions) {
+        public void setRemovedMissions(long[] removedMissions) {
             this.removedMissions = removedMissions;
         }
 
@@ -76,17 +76,17 @@ public class FinishMissionResponse {
     }
     
     public static class CharacterUpdate {
-        private int id;
+        private long id;
         private String name;
         private CharacterStatus status;
-        private int missionId;
+        private long missionId;
         private CharacterSkill[] skills;
 
-        public int getId() {
+        public long getId() {
             return id;
         }
 
-        public void setId(int id) {
+        public void setId(long id) {
             this.id = id;
         }
 
@@ -106,11 +106,11 @@ public class FinishMissionResponse {
             this.status = status;
         }
 
-        public int getMissionId() {
+        public long getMissionId() {
             return missionId;
         }
 
-        public void setMissionId(int missionId) {
+        public void setMissionId(long missionId) {
             this.missionId = missionId;
         }
 
