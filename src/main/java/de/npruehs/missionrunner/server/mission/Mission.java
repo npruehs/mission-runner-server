@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import de.npruehs.missionrunner.server.account.Account;
 
 @Entity
@@ -16,6 +18,7 @@ public class Mission {
 	private long id;
 
 	@ManyToOne
+	@JsonIgnore
     private Account account;
 
     private String name;

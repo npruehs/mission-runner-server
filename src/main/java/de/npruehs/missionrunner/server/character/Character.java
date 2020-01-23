@@ -5,6 +5,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import de.npruehs.missionrunner.server.account.Account;
 import de.npruehs.missionrunner.server.mission.Mission;
 
@@ -15,6 +17,7 @@ public class Character {
     private long id;
 
     @ManyToOne
+	@JsonIgnore
     private Account account;
     
     private String name;
