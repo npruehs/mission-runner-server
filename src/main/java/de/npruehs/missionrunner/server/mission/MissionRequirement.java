@@ -1,9 +1,12 @@
 package de.npruehs.missionrunner.server.mission;
 
 public class MissionRequirement {
-	private final String requirement;
+	private String requirement;
 	
-	private final int count;
+	private int count;
+	
+	public MissionRequirement() {
+	}
 	
 	public MissionRequirement(String requirement, int count) {
 		this.requirement = requirement;
@@ -16,5 +19,13 @@ public class MissionRequirement {
 
 	public int getCount() {
 		return count;
+	}
+
+	public void setRequirement(String requirement) {
+		this.requirement = requirement;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
 	}
 }

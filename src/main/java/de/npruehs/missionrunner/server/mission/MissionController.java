@@ -86,9 +86,21 @@ public class MissionController {
 			return NetworkResponse.newErrorResponse(ErrorCode.MISSION_NOT_FOUND, "Mission not found.");
 		}
 		
+		// Check mission status.
+		if (mission.get().getStatus() != MissionStatus.OPEN) {
+			return NetworkResponse.newErrorResponse(ErrorCode.MISSION_ALREADY_RUNNING, "Mission already running.");
+		}
+				
 		// Find characters.
 		Iterable<Character> characters = characterRepository.findAllById(Arrays.asList(request.getCharacterIds()));
 		
+		// Check character status.
+		for (Character character : characters) {
+			if (character.getStatus() != CharacterStatus.IDLE) {
+				return NetworkResponse.newErrorResponse(ErrorCode.CHARACTER_NOT_IDLE, "Character not idle.");
+			}
+		}
+
 		// Check mission requirements.
 		if (!gameplay.canStartMission(mission.get(), characters)) {
 			return NetworkResponse.newErrorResponse(ErrorCode.MISSION_REQUIREMENTS_NOT_MET, "Mission requirements not met.");
@@ -102,7 +114,7 @@ public class MissionController {
 		StartMissionResponse.MissionUpdate missionUpdate = new StartMissionResponse.MissionUpdate();
 		missionUpdate.setId(request.getMissionId());
 		missionUpdate.setStatus(MissionStatus.RUNNING);
-		
+
 		// Assign characters.
 		for (Character character : characters) {
 			character.setMission(mission.get());
@@ -132,7 +144,7 @@ public class MissionController {
 	}
 
 	@PostMapping("/missions/finish")
-	public NetworkResponse<FinishMissionResponse> start(@RequestBody FinishMissionRequest request) {
+	public NetworkResponse<FinishMissionResponse> finish(@RequestBody FinishMissionRequest request) {
 		if (request == null) {
 			return NetworkResponse.newErrorResponse(ErrorCode.BAD_REQUEST, "Bad Request");
 		}
@@ -151,6 +163,11 @@ public class MissionController {
 			return NetworkResponse.newErrorResponse(ErrorCode.MISSION_NOT_FOUND, "Mission not found.");
 		}
 
+		// Check mission status.
+		if (mission.get().getStatus() != MissionStatus.RUNNING) {
+			return NetworkResponse.newErrorResponse(ErrorCode.MISSION_NOT_RUNNING, "Mission not running.");
+		}
+				
 		// Check if mission is actually finished.
 		DateTime missionStartTime = new DateTime(mission.get().getStartTime().getTime());
 		DateTime missionEndTime = missionStartTime.plusSeconds(mission.get().getRequiredTime());

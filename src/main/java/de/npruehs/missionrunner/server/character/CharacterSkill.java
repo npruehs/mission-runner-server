@@ -1,9 +1,12 @@
 package de.npruehs.missionrunner.server.character;
 
 public class CharacterSkill {
-	private final String skill;
+	private String skill;
 
-    private final int count;
+    private int count;
+    
+    public CharacterSkill() {
+    }
     
     public CharacterSkill(String skill, int count) {
     	this.skill = skill;
@@ -16,5 +19,13 @@ public class CharacterSkill {
 
 	public int getCount() {
 		return count;
+	}
+
+	public void setSkill(String skill) {
+		this.skill = skill;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
 	}
 }
