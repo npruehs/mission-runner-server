@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -31,6 +32,7 @@ public class Mission {
 
     private Timestamp startTime;
     
+    @Transient
     private int remainingTime;
     
     private int reward;
