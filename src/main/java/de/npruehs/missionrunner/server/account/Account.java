@@ -2,6 +2,7 @@ package de.npruehs.missionrunner.server.account;
 
 import java.util.Collection;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -14,10 +15,10 @@ public class Account {
 	@Id
 	private String id;
 	
-	@OneToMany(mappedBy="account")
+	@OneToMany(mappedBy="account", cascade = { CascadeType.ALL })
 	private Collection<Character> characters;
 	
-	@OneToMany(mappedBy="account")
+	@OneToMany(mappedBy="account", cascade = { CascadeType.ALL })
 	private Collection<Mission> missions;
 	
 	private String name;

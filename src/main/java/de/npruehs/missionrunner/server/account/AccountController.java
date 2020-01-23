@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.google.common.collect.Lists;
+
 import de.npruehs.missionrunner.server.character.Character;
 import de.npruehs.missionrunner.server.character.CharacterSkill;
 import de.npruehs.missionrunner.server.mission.Mission;
@@ -59,6 +61,9 @@ public class AccountController {
 		missions[1] = new Mission(newAccount, "TestMissionB", requirements, 10, 100);
 		
 		// Save new account.
+		newAccount.setCharacters(Lists.newArrayList(characters));
+		newAccount.setMissions(Lists.newArrayList(missions));
+		
 		newAccount = repository.save(newAccount);
 		return newAccount;
 	}
