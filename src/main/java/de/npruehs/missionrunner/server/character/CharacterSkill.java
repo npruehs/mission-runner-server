@@ -1,6 +1,10 @@
 package de.npruehs.missionrunner.server.character;
 
-public class CharacterSkill {
+import java.io.Serializable;
+
+public class CharacterSkill implements Serializable {
+	private static final long serialVersionUID = -9065268795643338559L;
+
 	private String skill;
 
     private int count;
