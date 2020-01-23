@@ -35,6 +35,13 @@ public class CharacterController {
 		List<Character> characters = characterRepository.findByAccount(account.get());
 		Character[] characterArray = Iterables.toArray(characters, Character.class);
 		
+		// Convert mission ids.
+		for (Character character : characterArray) {
+			if (character.getMission() != null) {
+				character.setMissionId(character.getMission().getId());
+			}
+		}
+				
 		return NetworkResponse.newSuccessResponse(characterArray);
 	}
 }
