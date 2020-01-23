@@ -58,15 +58,17 @@ public class MissionController {
 
 		// Convert remaining time.
 		for (Mission mission : missionsArray) {
-			DateTime missionStartTime = new DateTime(mission.getStartTime().getTime());
-			DateTime missionEndTime = missionStartTime.plusSeconds(mission.getRequiredTime());
-			DateTime now = DateTime.now(DateTimeZone.UTC);
-			
-			if (missionEndTime.isBefore(now)) {
-				mission.setRemainingTime(0);
-			} else {
-				Period remainingTime = new Period(now, missionEndTime, PeriodType.seconds());
-				mission.setRemainingTime(remainingTime.getSeconds());
+			if (mission.getStartTime() != null) {
+				DateTime missionStartTime = new DateTime(mission.getStartTime().getTime());
+				DateTime missionEndTime = missionStartTime.plusSeconds(mission.getRequiredTime());
+				DateTime now = DateTime.now(DateTimeZone.UTC);
+				
+				if (missionEndTime.isBefore(now)) {
+					mission.setRemainingTime(0);
+				} else {
+					Period remainingTime = new Period(now, missionEndTime, PeriodType.seconds());
+					mission.setRemainingTime(remainingTime.getSeconds());
+				}
 			}
 		}
 		
