@@ -2,7 +2,6 @@ package de.npruehs.missionrunner.server.mission.net;
 
 import de.npruehs.missionrunner.server.character.CharacterSkill;
 import de.npruehs.missionrunner.server.character.CharacterStatus;
-import de.npruehs.missionrunner.server.mission.Mission;
 import de.npruehs.missionrunner.server.mission.MissionData;
 
 public class FinishMissionResponse {

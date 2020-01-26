@@ -44,17 +44,17 @@ public class AccountController {
 		
 		// Create initial characters.
 		CharacterSkill[] skills = new CharacterSkill[1];
-		skills[0] = new CharacterSkill("A", 1);
+		skills[0] = new CharacterSkill("skill.A", 1);
 		
 		Character[] characters = new Character[1];
-		characters[0] = new Character(newAccount, "TutorialCharacter", skills);
+		characters[0] = new Character(newAccount, "character.tutorial", skills);
 
 		// Create initial missions.
 		MissionRequirement[] requirements = new MissionRequirement[1];
-		requirements[0] = new MissionRequirement("A", 1);
+		requirements[0] = new MissionRequirement("skill.A", 1);
 		
 		Mission[] missions = new Mission[1];
-		missions[0] = new Mission(newAccount, "TutorialMission", requirements, 10, 100);
+		missions[0] = new Mission(newAccount, "mission.tutorial", requirements, 10, 100);
 		
 		// Save new account.
 		newAccount.setCharacters(Lists.newArrayList(characters));
