@@ -23,6 +23,7 @@ import de.npruehs.missionrunner.server.NetworkResponse;
 import de.npruehs.missionrunner.server.account.Account;
 import de.npruehs.missionrunner.server.account.AccountRepository;
 import de.npruehs.missionrunner.server.character.Character;
+import de.npruehs.missionrunner.server.character.CharacterData;
 import de.npruehs.missionrunner.server.character.CharacterController;
 import de.npruehs.missionrunner.server.character.CharacterRepository;
 
@@ -64,9 +65,8 @@ public class CharacterControllerTests {
 		// ASSERT.
 		String responseBody = mvcResult.getResponse().getContentAsString();
 		  
-		NetworkResponse<Character[]> response = objectMapper.readValue(responseBody, new TypeReference<NetworkResponse<Character[]>>() {});
+		NetworkResponse<CharacterData[]> response = objectMapper.readValue(responseBody, new TypeReference<NetworkResponse<CharacterData[]>>() {});
 		
-		assertThat(response.getData()[0].getAccount().getId()).isEqualTo(accountId);
 		assertThat(response.getData()[0].getId()).isEqualTo(mockCharacter.getId());
 	}
 }

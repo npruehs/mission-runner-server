@@ -7,8 +7,6 @@ import java.util.Optional;
 
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
-import org.joda.time.Period;
-import org.joda.time.PeriodType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -46,7 +44,7 @@ public class MissionController {
 	private Gameplay gameplay;
 	
 	@GetMapping("/missions/get")
-	public NetworkResponse<Mission[]> get(@RequestParam(value = "accountId") String accountId) {
+	public NetworkResponse<MissionData[]> get(@RequestParam(value = "accountId") String accountId) {
 		Optional<Account> account = accountRepository.findById(accountId);
 
 		if (!account.isPresent()) {
@@ -54,25 +52,14 @@ public class MissionController {
 		}
 
 		List<Mission> missions = missionRepository.findByAccount(account.get());
-		Mission[] missionsArray = Iterables.toArray(missions, Mission.class);
+		MissionData[] missionData = new MissionData[missions.size()];
 
-		// Convert remaining time.
-		for (Mission mission : missionsArray) {
-			if (mission.getStartTime() != null) {
-				DateTime missionStartTime = new DateTime(mission.getStartTime().getTime());
-				DateTime missionEndTime = missionStartTime.plusSeconds(mission.getRequiredTime());
-				DateTime now = DateTime.now(DateTimeZone.UTC);
-				
-				if (missionEndTime.isBefore(now)) {
-					mission.setRemainingTime(0);
-				} else {
-					Period remainingTime = new Period(now, missionEndTime, PeriodType.seconds());
-					mission.setRemainingTime(remainingTime.getSeconds());
-				}
-			}
+		// Convert mission data.
+		for (int i = 0; i < missions.size(); ++i) {
+			missionData[i] = new MissionData(missions.get(i));
 		}
-		
-		return NetworkResponse.newSuccessResponse(missionsArray);
+
+		return NetworkResponse.newSuccessResponse(missionData);
 	}
 
 	@PostMapping("/missions/start")
@@ -229,7 +216,7 @@ public class MissionController {
 		// Build mission update.
 		FinishMissionResponse.MissionUpdate missionUpdate = new FinishMissionResponse.MissionUpdate();
 		missionUpdate.setRemovedMissions(new long[] { request.getMissionId() });
-		missionUpdate.setAddedMissions(new Mission[] { newMission });
+		missionUpdate.setAddedMissions(new MissionData[] { new MissionData(newMission) });
 
 		// Build unassigned characters update.
 		int changedCharacters = Iterables.size(assignedCharacters);

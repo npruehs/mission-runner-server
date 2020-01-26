@@ -4,9 +4,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.Transient;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import de.npruehs.missionrunner.server.account.Account;
 import de.npruehs.missionrunner.server.mission.Mission;
@@ -18,7 +15,6 @@ public class Character {
     private long id;
 
     @ManyToOne
-	@JsonIgnore
     private Account account;
     
     private String name;
@@ -28,9 +24,6 @@ public class Character {
     @ManyToOne
     private Mission mission;
 
-    @Transient
-    private long missionId;
-    
     private CharacterSkill[] skills;
 
     public Character() {
@@ -64,10 +57,6 @@ public class Character {
 		return mission;
 	}
 
-	public long getMissionId() {
-		return missionId;
-	}
-
 	public CharacterSkill[] getSkills() {
 		return skills;
 	}
@@ -92,10 +81,6 @@ public class Character {
 		this.mission = mission;
 	}
 
-	public void setMissionId(long missionId) {
-		this.missionId = missionId;
-	}
-	
 	public void setSkills(CharacterSkill[] skills) {
 		this.skills = skills;
 	}

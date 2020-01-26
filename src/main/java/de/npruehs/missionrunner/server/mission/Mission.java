@@ -6,9 +6,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.Transient;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import de.npruehs.missionrunner.server.account.Account;
 
@@ -19,7 +16,6 @@ public class Mission {
 	private long id;
 
 	@ManyToOne
-	@JsonIgnore
     private Account account;
 
     private String name;
@@ -31,9 +27,6 @@ public class Mission {
     private int requiredTime;
 
     private Timestamp startTime;
-    
-    @Transient
-    private int remainingTime;
     
     private int reward;
     
@@ -48,7 +41,6 @@ public class Mission {
     	this.reward = reward;
     	
     	this.status = MissionStatus.OPEN;
-    	this.remainingTime = this.requiredTime;
     }
 
 	public long getId() {
@@ -77,10 +69,6 @@ public class Mission {
 
 	public Timestamp getStartTime() {
 		return startTime;
-	}
-
-	public int getRemainingTime() {
-		return remainingTime;
 	}
 
 	public int getReward() {
@@ -113,10 +101,6 @@ public class Mission {
 	
 	public void setStartTime(Timestamp startTime) {
 		this.startTime = startTime;
-	}
-
-	public void setRemainingTime(int remainingTime) {
-		this.remainingTime = remainingTime;
 	}
 
 	public void setReward(int reward) {

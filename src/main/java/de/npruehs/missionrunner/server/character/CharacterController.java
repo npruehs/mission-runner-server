@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.google.common.collect.Iterables;
-
 import de.npruehs.missionrunner.server.ErrorCode;
 import de.npruehs.missionrunner.server.NetworkResponse;
 import de.npruehs.missionrunner.server.account.Account;
@@ -25,7 +23,7 @@ public class CharacterController {
 	
 	
 	@GetMapping("/characters/get")
-	public NetworkResponse<Character[]> get(@RequestParam(value = "accountId") String accountId) {
+	public NetworkResponse<CharacterData[]> get(@RequestParam(value = "accountId") String accountId) {
 		Optional<Account> account = accountRepository.findById(accountId);
 		
 		if (!account.isPresent()) {
@@ -33,15 +31,13 @@ public class CharacterController {
 		}
 		
 		List<Character> characters = characterRepository.findByAccount(account.get());
-		Character[] characterArray = Iterables.toArray(characters, Character.class);
-		
-		// Convert mission ids.
-		for (Character character : characterArray) {
-			if (character.getMission() != null) {
-				character.setMissionId(character.getMission().getId());
-			}
+		CharacterData[] characterData = new CharacterData[characters.size()];
+
+		// Convert character data.
+		for (int i = 0; i < characters.size(); ++i) {
+			characterData[i] = new CharacterData(characters.get(i));
 		}
-				
-		return NetworkResponse.newSuccessResponse(characterArray);
+	
+		return NetworkResponse.newSuccessResponse(characterData);
 	}
 }

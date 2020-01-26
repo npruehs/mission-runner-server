@@ -3,6 +3,7 @@ package de.npruehs.missionrunner.server.mission.net;
 import de.npruehs.missionrunner.server.character.CharacterSkill;
 import de.npruehs.missionrunner.server.character.CharacterStatus;
 import de.npruehs.missionrunner.server.mission.Mission;
+import de.npruehs.missionrunner.server.mission.MissionData;
 
 public class FinishMissionResponse {
 	private MissionUpdate missions;
@@ -35,7 +36,7 @@ public class FinishMissionResponse {
 
 	public static class MissionUpdate {
         private long[] removedMissions;
-        private Mission[] addedMissions;
+        private MissionData[] addedMissions;
 
         public long[] getRemovedMissions() {
             return removedMissions;
@@ -45,11 +46,11 @@ public class FinishMissionResponse {
             this.removedMissions = removedMissions;
         }
 
-        public Mission[] getAddedMissions() {
+        public MissionData[] getAddedMissions() {
             return addedMissions;
         }
 
-        public void setAddedMissions(Mission[] addedMissions) {
+        public void setAddedMissions(MissionData[] addedMissions) {
             this.addedMissions = addedMissions;
         }
     }

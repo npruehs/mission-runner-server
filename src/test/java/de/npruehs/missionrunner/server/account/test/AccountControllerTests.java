@@ -19,6 +19,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import de.npruehs.missionrunner.server.account.Account;
 import de.npruehs.missionrunner.server.account.AccountController;
+import de.npruehs.missionrunner.server.account.AccountData;
 import de.npruehs.missionrunner.server.account.AccountRepository;
 
 @WebMvcTest(controllers = AccountController.class)
@@ -49,7 +50,7 @@ public class AccountControllerTests {
 		// ASSERT.
 		String responseBody = mvcResult.getResponse().getContentAsString();
 		  
-		Account account = objectMapper.readValue(responseBody, Account.class);
+		AccountData account = objectMapper.readValue(responseBody, AccountData.class);
 
 		assertThat(account.getId()).isEqualTo(accountId);
 	}
@@ -71,7 +72,7 @@ public class AccountControllerTests {
 		// ASSERT.
 		String responseBody = mvcResult.getResponse().getContentAsString();
 		  
-		Account account = objectMapper.readValue(responseBody, Account.class);
+		AccountData account = objectMapper.readValue(responseBody, AccountData.class);
 
 		assertThat(account.getId()).isEqualTo(accountId);
 	}

@@ -34,6 +34,7 @@ import de.npruehs.missionrunner.server.character.CharacterSkill;
 import de.npruehs.missionrunner.server.character.CharacterStatus;
 import de.npruehs.missionrunner.server.mission.Mission;
 import de.npruehs.missionrunner.server.mission.MissionController;
+import de.npruehs.missionrunner.server.mission.MissionData;
 import de.npruehs.missionrunner.server.mission.MissionRepository;
 import de.npruehs.missionrunner.server.mission.MissionRequirement;
 import de.npruehs.missionrunner.server.mission.MissionStatus;
@@ -83,7 +84,7 @@ public class MissionControllerTests {
 		// ASSERT.
 		String responseBody = mvcResult.getResponse().getContentAsString();
 		  
-		NetworkResponse<Mission[]> response = objectMapper.readValue(responseBody, new TypeReference<NetworkResponse<Mission[]>>() {});
+		NetworkResponse<MissionData[]> response = objectMapper.readValue(responseBody, new TypeReference<NetworkResponse<MissionData[]>>() {});
 
 		assertThat(response.getData()[0].getRemainingTime()).isGreaterThan(0);
 	}

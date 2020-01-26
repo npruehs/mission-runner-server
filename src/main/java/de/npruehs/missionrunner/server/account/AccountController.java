@@ -30,12 +30,12 @@ public class AccountController {
 	}
 	
 	@GetMapping("/account/get")
-	public Account get(@RequestParam(value = "id") String id) {
+	public AccountData get(@RequestParam(value = "id") String id) {
 		// Check if account exists.
 		Optional<Account> existingAccount = repository.findById(id);
 		
 		if (existingAccount.isPresent()) {
-			return existingAccount.get();
+			return new AccountData(existingAccount.get());
 		}
 		
 		// Create new account (supports mobile auto-login to reduce user churns).
@@ -61,6 +61,6 @@ public class AccountController {
 		newAccount.setMissions(Lists.newArrayList(missions));
 		
 		newAccount = repository.save(newAccount);
-		return newAccount;
+		return new AccountData(newAccount);
 	}
 }
