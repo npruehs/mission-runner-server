@@ -3,8 +3,6 @@ package de.npruehs.missionrunner.server.account;
 import java.util.Optional;
 import java.util.Random;
 
-import javax.annotation.PostConstruct;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,15 +17,11 @@ import de.npruehs.missionrunner.server.mission.MissionRequirement;
 
 @RestController
 public class AccountController {
+	@Autowired
 	private Random random;
 	
 	@Autowired
 	private AccountRepository repository;
-	
-	@PostConstruct
-	public void postConstruct() {
-		random = new Random();
-	}
 	
 	@GetMapping("/account/get")
 	public AccountData get(@RequestParam(value = "id") String id) {
