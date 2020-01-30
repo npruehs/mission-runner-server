@@ -11,6 +11,7 @@ import com.google.common.hash.HashFunction;
 import com.google.common.hash.Hasher;
 import com.google.common.hash.Hashing;
 
+import de.npruehs.missionrunner.server.NetworkResponse;
 import de.npruehs.missionrunner.server.localization.LocalizedString.LocalizedStringFunnel;
 
 @RestController
@@ -19,7 +20,7 @@ public class LocalizationController {
 	private LocalizationRepository repository;
 	
 	@GetMapping("/localization/get")
-	public LocalizationData get(@RequestParam(value = "hash") String hash) {
+	public NetworkResponse<LocalizationData> get(@RequestParam(value = "hash", required = false) String hash) {
 		// Get strings.
 		Iterable<LocalizedString> strings = repository.findAll();
 		
@@ -37,10 +38,12 @@ public class LocalizationController {
 		
 		// Compare hashes.
 		if (hashCode.toString().equals(hash)) {
-			return new LocalizationData(hash, null);
+			return NetworkResponse.newSuccessResponse(
+					new LocalizationData(hash, null));
 		}
 		
 		// Return new strings.
-		return new LocalizationData(hashCode.toString(), Iterables.toArray(strings, LocalizedString.class));
+		return NetworkResponse.newSuccessResponse(
+				new LocalizationData(hashCode.toString(), Iterables.toArray(strings, LocalizedString.class)));
 	}
 }

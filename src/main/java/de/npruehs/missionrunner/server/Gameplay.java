@@ -90,7 +90,7 @@ public class Gameplay {
 			skills[0] = new CharacterSkill(characterSkills[firstSkillIndex], 2);
 		}
 		
-		Character newCharacter = new Character(account, "character.awesomenewcharacter" + level, skills);
+		Character newCharacter = new Character(account, "character.awesomenewcharacter", skills);
 		return newCharacter;
 	}
 	
@@ -127,7 +127,7 @@ public class Gameplay {
 		int requiredTime = level * (level + 1) * 5;
 		int reward = (int)Math.ceil(requiredTime / 1.5);
 		
-		Mission newMission = new Mission(account, "mission.superimportantmission" + random.nextInt(100),
+		Mission newMission = new Mission(account, "mission.superimportantmission",
 				requirementsArray, requiredTime, reward);
 		
 		return newMission;
