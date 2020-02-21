@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.google.common.collect.Lists;
 
+import de.npruehs.missionrunner.server.analytics.AnalyticsEventSender;
 import de.npruehs.missionrunner.server.character.Character;
 import de.npruehs.missionrunner.server.character.CharacterSkill;
 import de.npruehs.missionrunner.server.mission.Mission;
@@ -22,6 +23,9 @@ public class AccountController {
 	
 	@Autowired
 	private AccountRepository repository;
+	
+	@Autowired
+	private AnalyticsEventSender analyticsEventSender;
 	
 	@GetMapping("/account/get")
 	public AccountData get(@RequestParam(value = "id") String id) {
@@ -55,6 +59,10 @@ public class AccountController {
 		newAccount.setMissions(Lists.newArrayList(missions));
 		
 		newAccount = repository.save(newAccount);
+		
+		// Send analytics event.
+		analyticsEventSender.sendEvent("account:created");
+		
 		return new AccountData(newAccount);
 	}
 }

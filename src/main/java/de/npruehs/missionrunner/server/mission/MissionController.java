@@ -21,6 +21,7 @@ import de.npruehs.missionrunner.server.Gameplay;
 import de.npruehs.missionrunner.server.NetworkResponse;
 import de.npruehs.missionrunner.server.account.Account;
 import de.npruehs.missionrunner.server.account.AccountRepository;
+import de.npruehs.missionrunner.server.analytics.AnalyticsEventSender;
 import de.npruehs.missionrunner.server.character.Character;
 import de.npruehs.missionrunner.server.character.CharacterRepository;
 import de.npruehs.missionrunner.server.character.CharacterStatus;
@@ -42,6 +43,9 @@ public class MissionController {
 
 	@Autowired
 	private Gameplay gameplay;
+	
+	@Autowired
+	private AnalyticsEventSender analyticsEventSender;
 	
 	@GetMapping("/missions/get")
 	public NetworkResponse<MissionData[]> get(@RequestParam(value = "accountId") String accountId) {
@@ -122,6 +126,9 @@ public class MissionController {
 			
 			characterUpdates[i] = characterUpdate;
 		}
+		
+		// Send analytics event.
+		analyticsEventSender.sendEvent("mission:started");
 		
 		// Send response.
 		StartMissionResponse response = new StartMissionResponse();
@@ -248,6 +255,9 @@ public class MissionController {
 			characterUpdates[characterIndex].setSkills(newCharacter.getSkills());
 		}
 
+		// Send analytics event.
+		analyticsEventSender.sendEvent("mission:finished");
+		
 		// Return response.
 		FinishMissionResponse response = new FinishMissionResponse();
 		response.setAccount(accountUpdate);

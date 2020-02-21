@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 
 import com.google.common.base.Predicates;
 
+import de.npruehs.missionrunner.server.analytics.AnalyticsEventSender;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -43,6 +44,11 @@ public class ServerApplication {
 	@Bean
 	public Random random() {
 		return new Random();
+	}
+	
+	@Bean
+	public AnalyticsEventSender analyticsEventSender() {
+		return new AnalyticsEventSender();
 	}
 	
 	public static void main(String[] args) {
