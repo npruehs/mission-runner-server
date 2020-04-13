@@ -1,0 +1,9 @@
+Gets details about the account with the specified id, creating a new one if necessary. 
+
+include::{snippets}/account/get/curl-request.adoc[]
+include::{snippets}/account/get/request-parameters.adoc[]
+
+Account data is returned as JSON:
+
+include::{snippets}/account/get/response-body.adoc[]
+include::{snippets}/account/get/response-fields.adoc[]

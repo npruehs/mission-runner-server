@@ -2,6 +2,7 @@ plugins {
 	id 'org.springframework.boot' version '2.2.2.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
 	id 'java'
+	id 'org.asciidoctor.convert' version '1.5.9.2'
 }
 
 group = 'de.npruehs.missionrunner'
@@ -24,6 +25,9 @@ dependencies {
 	implementation 'io.springfox:springfox-swagger2:2.9.2'
 	implementation 'io.springfox:springfox-swagger-ui:2.9.2'
 	
+	asciidoctor 'org.springframework.restdocs:spring-restdocs-asciidoctor' 
+	testCompile 'org.springframework.restdocs:spring-restdocs-mockmvc' 
+	
 	runtimeOnly 'com.h2database:h2'
 	
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
@@ -33,6 +37,21 @@ dependencies {
 	testImplementation "com.google.truth:truth:1.0"
 }
 
+ext { 
+    snippetsDir = file('build/generated-snippets')
+}
+
 test {
 	useJUnitPlatform()
+	
+	outputs.dir snippetsDir
+}
+
+asciidoctor { 
+    inputs.dir snippetsDir 
+    dependsOn test 
+}
+
+bootJar {
+    dependsOn asciidoctor
 }
