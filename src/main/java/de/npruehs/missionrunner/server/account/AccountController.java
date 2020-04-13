@@ -3,6 +3,7 @@ package de.npruehs.missionrunner.server.account;
 import java.util.Optional;
 import java.util.Random;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,6 +20,9 @@ import de.npruehs.missionrunner.server.mission.MissionRequirement;
 @RestController
 public class AccountController {
 	@Autowired
+    private ModelMapper modelMapper;
+	
+	@Autowired
 	private Random random;
 	
 	@Autowired
@@ -33,7 +37,7 @@ public class AccountController {
 		Optional<Account> existingAccount = repository.findById(id);
 		
 		if (existingAccount.isPresent()) {
-			return new AccountData(existingAccount.get());
+			return modelMapper.map(existingAccount.get(), AccountData.class);
 		}
 		
 		// Create new account (supports mobile auto-login to reduce user churns).
@@ -63,6 +67,6 @@ public class AccountController {
 		// Send analytics event.
 		analyticsEventSender.sendEvent("account:created");
 		
-		return new AccountData(newAccount);
+		return modelMapper.map(newAccount, AccountData.class);
 	}
 }

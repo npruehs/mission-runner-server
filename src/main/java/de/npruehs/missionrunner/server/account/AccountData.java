@@ -5,16 +5,6 @@ public class AccountData {
 	private String name;
 	private int level;
 	private int score;
-	
-	public AccountData() {
-	}
-	
-	public AccountData(Account account) {
-		this.id = account.getId();
-		this.name = account.getName();
-		this.level = account.getLevel();
-		this.score = account.getScore();
-	}
 
 	public String getId() {
 		return id;
