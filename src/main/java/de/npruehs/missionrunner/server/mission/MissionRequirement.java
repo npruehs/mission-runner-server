@@ -1,10 +1,6 @@
 package de.npruehs.missionrunner.server.mission;
 
-import java.io.Serializable;
-
-public class MissionRequirement implements Serializable {
-	private static final long serialVersionUID = 5930616380135034694L;
-
+public class MissionRequirement {
 	private String requirement;
 	
 	private int count;

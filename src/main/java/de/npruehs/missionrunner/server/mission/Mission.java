@@ -1,12 +1,19 @@
 package de.npruehs.missionrunner.server.mission;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 
+import javax.persistence.Convert;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import com.google.common.collect.Lists;
+
+import de.npruehs.missionrunner.server.JpaConverterJson;
 import de.npruehs.missionrunner.server.account.Account;
 
 @Entity
@@ -20,9 +27,11 @@ public class Mission {
 
     private String name;
 
+    @Enumerated(EnumType.STRING)
     private MissionStatus status;
 
-    private MissionRequirement[] requirements;
+    @Convert(converter = JpaConverterJson.class)
+    private ArrayList<MissionRequirement> requirements;
 
     private int requiredTime;
 
@@ -36,7 +45,7 @@ public class Mission {
     public Mission(Account account, String name, MissionRequirement[] requirements, int requiredTime, int reward) {
     	this.account = account;
     	this.name = name;
-    	this.requirements = requirements;
+    	this.requirements = Lists.newArrayList(requirements);
     	this.requiredTime = requiredTime;
     	this.reward = reward;
     	
@@ -60,7 +69,7 @@ public class Mission {
 	}
 
 	public MissionRequirement[] getRequirements() {
-		return requirements;
+		return requirements.toArray(new MissionRequirement[requirements.size()]);
 	}
 
 	public int getRequiredTime() {
@@ -92,7 +101,7 @@ public class Mission {
 	}
 
 	public void setRequirements(MissionRequirement[] requirements) {
-		this.requirements = requirements;
+		this.requirements = Lists.newArrayList(requirements);
 	}
 
 	public void setRequiredTime(int requiredTime) {
