@@ -3,6 +3,7 @@ plugins {
 	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
 	id 'java'
 	id 'org.asciidoctor.convert' version '1.5.9.2'
+	id "org.flywaydb.flyway" version "6.3.3"
 }
 
 group = 'de.npruehs.missionrunner'
@@ -52,6 +53,13 @@ test {
 asciidoctor { 
     inputs.dir snippetsDir 
     dependsOn test 
+}
+
+flyway {
+    url = 'jdbc:h2:~/.h2/mission-runner'
+    user = 'sa'
+    password = 'mr'
+    baselineOnMigrate = true
 }
 
 bootJar {
