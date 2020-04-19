@@ -1,10 +1,18 @@
 package de.npruehs.missionrunner.server.character;
 
+import java.util.ArrayList;
+
+import javax.persistence.Convert;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import com.google.common.collect.Lists;
+
+import de.npruehs.missionrunner.server.JpaConverterJson;
 import de.npruehs.missionrunner.server.account.Account;
 import de.npruehs.missionrunner.server.mission.Mission;
 
@@ -19,12 +27,14 @@ public class Character {
     
     private String name;
 
+    @Enumerated(EnumType.STRING)
     private CharacterStatus status;
 
     @ManyToOne
     private Mission mission;
 
-    private CharacterSkill[] skills;
+    @Convert(converter = JpaConverterJson.class)
+    private ArrayList<CharacterSkill> skills;
 
     public Character() {
     }
@@ -32,7 +42,7 @@ public class Character {
 	public Character(Account account, String name, CharacterSkill[] skills) {
 		this.account = account;
 		this.name = name;
-		this.skills = skills;
+		this.skills = Lists.newArrayList(skills);
 		
 		this.status = CharacterStatus.IDLE;
 	}
@@ -58,7 +68,7 @@ public class Character {
 	}
 
 	public CharacterSkill[] getSkills() {
-		return skills;
+		return skills.toArray(new CharacterSkill[skills.size()]);
 	}
 
 	public void setId(long id) {
@@ -82,6 +92,6 @@ public class Character {
 	}
 
 	public void setSkills(CharacterSkill[] skills) {
-		this.skills = skills;
+		this.skills = Lists.newArrayList(skills);
 	}
 }
