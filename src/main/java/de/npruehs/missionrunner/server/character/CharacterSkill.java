@@ -1,7 +1,9 @@
 package de.npruehs.missionrunner.server.character;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
+@EqualsAndHashCode
 public class CharacterSkill {
 	@Getter
 	private String skill;

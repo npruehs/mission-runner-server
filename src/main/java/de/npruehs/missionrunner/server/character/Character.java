@@ -12,7 +12,6 @@ import javax.persistence.ManyToOne;
 
 import com.google.common.collect.Lists;
 
-import de.npruehs.missionrunner.server.JpaConverterJson;
 import de.npruehs.missionrunner.server.account.Account;
 import de.npruehs.missionrunner.server.mission.Mission;
 import lombok.Getter;
@@ -43,7 +42,7 @@ public class Character {
 	@Setter
     private Mission mission;
 
-    @Convert(converter = JpaConverterJson.class)
+    @Convert(converter = CharacterSkillJpaConverter.class)
     private ArrayList<CharacterSkill> skills;
 
     public Character() {

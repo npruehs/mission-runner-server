@@ -13,7 +13,6 @@ import javax.persistence.ManyToOne;
 
 import com.google.common.collect.Lists;
 
-import de.npruehs.missionrunner.server.JpaConverterJson;
 import de.npruehs.missionrunner.server.account.Account;
 import lombok.Getter;
 import lombok.Setter;
@@ -37,7 +36,7 @@ public class Mission {
     @Setter
     private MissionStatus status;
 
-    @Convert(converter = JpaConverterJson.class)
+    @Convert(converter = MissionRequirementJpaConverter.class)
     private ArrayList<MissionRequirement> requirements;
 
     @Getter

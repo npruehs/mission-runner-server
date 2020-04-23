@@ -1,7 +1,9 @@
 package de.npruehs.missionrunner.server.mission;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
+@EqualsAndHashCode
 public class MissionRequirement {
 	@Getter
 	private String requirement;

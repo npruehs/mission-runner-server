@@ -6,15 +6,16 @@ import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Converter
-public class JpaConverterJson implements AttributeConverter<Object, String> {
+public class JpaConverterJson<T> implements AttributeConverter<T, String> {
 
 	private final static ObjectMapper objectMapper = new ObjectMapper();
 
 	@Override
-	public String convertToDatabaseColumn(Object attribute) {
+	public String convertToDatabaseColumn(T attribute) {
 		try {
 			return objectMapper.writeValueAsString(attribute);
 		} catch (JsonProcessingException ex) {
@@ -23,9 +24,9 @@ public class JpaConverterJson implements AttributeConverter<Object, String> {
 	}
 
 	@Override
-	public Object convertToEntityAttribute(String dbData) {
+	public T convertToEntityAttribute(String dbData) {
 		try {
-			return objectMapper.readValue(dbData, Object.class);
+			return objectMapper.readValue(dbData, new TypeReference<T>() {});
 		} catch (IOException ex) {
 			return null;
 		}
