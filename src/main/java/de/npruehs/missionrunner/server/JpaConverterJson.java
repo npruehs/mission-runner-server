@@ -8,7 +8,7 @@ import javax.persistence.Converter;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-@Converter(autoApply = true)
+@Converter
 public class JpaConverterJson implements AttributeConverter<Object, String> {
 
 	private final static ObjectMapper objectMapper = new ObjectMapper();
