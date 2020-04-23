@@ -15,28 +15,39 @@ import com.google.common.collect.Lists;
 
 import de.npruehs.missionrunner.server.JpaConverterJson;
 import de.npruehs.missionrunner.server.account.Account;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 public class Mission {
 	@Id
 	@GeneratedValue
+	@Getter
+	@Setter
 	private long id;
 
 	@ManyToOne
     private Account account;
 
+	@Getter
     private String name;
 
     @Enumerated(EnumType.STRING)
+    @Getter
+    @Setter
     private MissionStatus status;
 
     @Convert(converter = JpaConverterJson.class)
     private ArrayList<MissionRequirement> requirements;
 
+    @Getter
     private int requiredTime;
 
+    @Getter
+    @Setter
     private Timestamp startTime;
     
+    @Getter
     private int reward;
     
     public Mission() {
@@ -52,67 +63,11 @@ public class Mission {
     	this.status = MissionStatus.OPEN;
     }
 
-	public long getId() {
-		return id;
-	}
-
-	public Account getAccount() {
-		return account;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public MissionStatus getStatus() {
-		return status;
-	}
-
 	public MissionRequirement[] getRequirements() {
 		return requirements.toArray(new MissionRequirement[requirements.size()]);
 	}
 
-	public int getRequiredTime() {
-		return requiredTime;
-	}
-
-	public Timestamp getStartTime() {
-		return startTime;
-	}
-
-	public int getReward() {
-		return reward;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public void setAccount(Account account) {
-		this.account = account;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public void setStatus(MissionStatus status) {
-		this.status = status;
-	}
-
 	public void setRequirements(MissionRequirement[] requirements) {
 		this.requirements = Lists.newArrayList(requirements);
-	}
-
-	public void setRequiredTime(int requiredTime) {
-		this.requiredTime = requiredTime;
-	}
-	
-	public void setStartTime(Timestamp startTime) {
-		this.startTime = startTime;
-	}
-
-	public void setReward(int reward) {
-		this.reward = reward;
 	}
 }

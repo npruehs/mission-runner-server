@@ -2,9 +2,13 @@ package de.npruehs.missionrunner.server.mission.net;
 
 import de.npruehs.missionrunner.server.account.Account;
 import de.npruehs.missionrunner.server.mission.Mission;
+import lombok.Getter;
 
 public class FinishMissionRequest {
+	@Getter
 	private String accountId;
+	
+	@Getter
     private long missionId;
 
     public FinishMissionRequest() {
@@ -13,21 +17,5 @@ public class FinishMissionRequest {
     public FinishMissionRequest(Account account, Mission mission) {
     	accountId = account.getId();
     	missionId = mission.getId();
-    }
-    
-    public String getAccountId() {
-        return accountId;
-    }
-
-    public void setAccountId(String accountId) {
-        this.accountId = accountId;
-    }
-
-    public long getMissionId() {
-        return missionId;
-    }
-
-    public void setMissionId(long missionId) {
-        this.missionId = missionId;
     }
 }

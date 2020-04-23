@@ -5,13 +5,28 @@ import org.joda.time.DateTimeZone;
 import org.joda.time.Period;
 import org.joda.time.PeriodType;
 
+import lombok.Getter;
+
 public class MissionData {
+	@Getter
 	private long id;
+	
+	@Getter
     private String name;
+	
+	@Getter
     private MissionStatus status;
+	
+	@Getter
     private MissionRequirement[] requirements;
+	
+	@Getter
     private int requiredTime;
+    
+	@Getter
     private int remainingTime;
+	
+	@Getter
     private int reward;
     
     public MissionData() {
@@ -42,60 +57,4 @@ public class MissionData {
 			}
 		}
     }
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public MissionStatus getStatus() {
-		return status;
-	}
-
-	public void setStatus(MissionStatus status) {
-		this.status = status;
-	}
-
-	public MissionRequirement[] getRequirements() {
-		return requirements;
-	}
-
-	public void setRequirements(MissionRequirement[] requirements) {
-		this.requirements = requirements;
-	}
-
-	public int getRequiredTime() {
-		return requiredTime;
-	}
-
-	public void setRequiredTime(int requiredTime) {
-		this.requiredTime = requiredTime;
-	}
-
-	public int getRemainingTime() {
-		return remainingTime;
-	}
-
-	public void setRemainingTime(int remainingTime) {
-		this.remainingTime = remainingTime;
-	}
-
-	public int getReward() {
-		return reward;
-	}
-
-	public void setReward(int reward) {
-		this.reward = reward;
-	}
 }

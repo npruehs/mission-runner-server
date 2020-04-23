@@ -1,33 +1,20 @@
 package de.npruehs.missionrunner.server;
 
+import lombok.Getter;
+import lombok.Setter;
+
 public class NetworkResponse<T> {
-    private Error error;
+    @Getter
+    @Setter
+	private Error error;
+    
+    @Getter
+    @Setter
     private boolean success;
+    
+    @Getter
+    @Setter
     private T data;
-
-    public Error getError() {
-        return error;
-    }
-
-    public void setError(Error error) {
-        this.error = error;
-    }
-
-    public boolean isSuccess() {
-        return success;
-    }
-
-    public void setSuccess(boolean success) {
-        this.success = success;
-    }
-
-    public T getData() {
-        return data;
-    }
-
-    public void setData(T data) {
-        this.data = data;
-    }
 
     public static <T> NetworkResponse<T> newSuccessResponse(T data) {
     	NetworkResponse<T> response = new NetworkResponse<T>();

@@ -1,8 +1,12 @@
 package de.npruehs.missionrunner.server.character;
 
+import lombok.Getter;
+
 public class CharacterSkill {
+	@Getter
 	private String skill;
 
+	@Getter
     private int count;
     
     public CharacterSkill() {
@@ -12,20 +16,4 @@ public class CharacterSkill {
     	this.skill = skill;
     	this.count = count;
     }
-
-	public String getSkill() {
-		return skill;
-	}
-
-	public int getCount() {
-		return count;
-	}
-
-	public void setSkill(String skill) {
-		this.skill = skill;
-	}
-
-	public void setCount(int count) {
-		this.count = count;
-	}
 }

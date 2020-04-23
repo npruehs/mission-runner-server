@@ -9,20 +9,35 @@ import javax.persistence.OneToMany;
 
 import de.npruehs.missionrunner.server.character.Character;
 import de.npruehs.missionrunner.server.mission.Mission;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 public class Account {
 	@Id
+	@Getter
 	private String id;
 	
 	@OneToMany(mappedBy="account", cascade = { CascadeType.ALL })
+	@Getter
+	@Setter
 	private Collection<Character> characters;
 	
 	@OneToMany(mappedBy="account", cascade = { CascadeType.ALL })
+	@Getter
+	@Setter
 	private Collection<Mission> missions;
 	
+	@Getter
+	@Setter
 	private String name;
+	
+	@Getter
+	@Setter
 	private int level;
+	
+	@Getter
+	@Setter
 	private int score;
 
 	public Account() {
@@ -32,54 +47,6 @@ public class Account {
 		this.id = id;
 		this.name = name;
 		this.level = level;
-		this.score = score;
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public Collection<Character> getCharacters() {
-		return characters;
-	}
-
-	public void setCharacters(Collection<Character> characters) {
-		this.characters = characters;
-	}
-	
-	public Collection<Mission> getMissions() {
-		return missions;
-	}
-
-	public void setMissions(Collection<Mission> missions) {
-		this.missions = missions;
-	}
-
-	public String getName() {
-		return name;
-	}
-	
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public int getLevel() {
-		return level;
-	}
-
-	public void setLevel(int level) {
-		this.level = level;
-	}
-
-	public int getScore() {
-		return score;
-	}
-	
-	public void setScore(int score) {
 		this.score = score;
 	}
 }

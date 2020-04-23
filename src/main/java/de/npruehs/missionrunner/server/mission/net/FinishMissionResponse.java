@@ -3,123 +3,61 @@ package de.npruehs.missionrunner.server.mission.net;
 import de.npruehs.missionrunner.server.character.CharacterSkill;
 import de.npruehs.missionrunner.server.character.CharacterStatus;
 import de.npruehs.missionrunner.server.mission.MissionData;
+import lombok.Getter;
+import lombok.Setter;
 
 public class FinishMissionResponse {
+	@Getter
+	@Setter
 	private MissionUpdate missions;
+	
+	@Getter
+	@Setter
     private AccountUpdate account;
+	
+	@Getter
+	@Setter
     private CharacterUpdate[] characters;
     
-    public MissionUpdate getMissions() {
-        return missions;
-    }
-
-    public void setMissions(MissionUpdate missions) {
-        this.missions = missions;
-    }
-
-    public AccountUpdate getAccount() {
-        return account;
-    }
-
-    public void setAccount(AccountUpdate account) {
-        this.account = account;
-    }
-
-    public CharacterUpdate[] getCharacters() {
-		return characters;
-	}
-
-	public void setCharacters(CharacterUpdate[] characters) {
-		this.characters = characters;
-	}
-
 	public static class MissionUpdate {
+		@Getter
+		@Setter
         private long[] removedMissions;
+		
+		@Getter
+		@Setter
         private MissionData[] addedMissions;
-
-        public long[] getRemovedMissions() {
-            return removedMissions;
-        }
-
-        public void setRemovedMissions(long[] removedMissions) {
-            this.removedMissions = removedMissions;
-        }
-
-        public MissionData[] getAddedMissions() {
-            return addedMissions;
-        }
-
-        public void setAddedMissions(MissionData[] addedMissions) {
-            this.addedMissions = addedMissions;
-        }
     }
 
     public static class AccountUpdate {
+		@Getter
+		@Setter
         private int score;
+    	
+		@Getter
+		@Setter
         private int level;
-
-        public int getScore() {
-            return score;
-        }
-
-        public void setScore(int score) {
-            this.score = score;
-        }
-
-        public int getLevel() {
-            return level;
-        }
-
-        public void setLevel(int level) {
-            this.level = level;
-        }
     }
     
     public static class CharacterUpdate {
+		@Getter
+		@Setter
         private long id;
+		
+		@Getter
+		@Setter
         private String name;
+        
+		@Getter
+		@Setter
         private CharacterStatus status;
+        
+		@Getter
+		@Setter
         private long missionId;
+		
+		@Getter
+		@Setter
         private CharacterSkill[] skills;
-
-        public long getId() {
-            return id;
-        }
-
-        public void setId(long id) {
-            this.id = id;
-        }
-
-        public String getName() {
-			return name;
-		}
-
-		public void setName(String name) {
-			this.name = name;
-		}
-
-		public CharacterStatus getStatus() {
-            return status;
-        }
-
-        public void setStatus(CharacterStatus status) {
-            this.status = status;
-        }
-
-        public long getMissionId() {
-            return missionId;
-        }
-
-        public void setMissionId(long missionId) {
-            this.missionId = missionId;
-        }
-
-		public CharacterSkill[] getSkills() {
-			return skills;
-		}
-
-		public void setSkills(CharacterSkill[] skills) {
-			this.skills = skills;
-		}
     }
 }

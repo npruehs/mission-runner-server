@@ -15,22 +15,32 @@ import com.google.common.collect.Lists;
 import de.npruehs.missionrunner.server.JpaConverterJson;
 import de.npruehs.missionrunner.server.account.Account;
 import de.npruehs.missionrunner.server.mission.Mission;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 public class Character {
 	@Id
 	@GeneratedValue
+	@Getter
+	@Setter
     private long id;
 
     @ManyToOne
     private Account account;
     
+    @Getter
+	@Setter
     private String name;
 
     @Enumerated(EnumType.STRING)
+    @Getter
+	@Setter
     private CharacterStatus status;
 
     @ManyToOne
+    @Getter
+	@Setter
     private Mission mission;
 
     @Convert(converter = JpaConverterJson.class)
@@ -47,48 +57,8 @@ public class Character {
 		this.status = CharacterStatus.IDLE;
 	}
 
-	public long getId() {
-		return id;
-	}
-
-	public Account getAccount() {
-		return account;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public CharacterStatus getStatus() {
-		return status;
-	}
-
-	public Mission getMission() {
-		return mission;
-	}
-
 	public CharacterSkill[] getSkills() {
 		return skills.toArray(new CharacterSkill[skills.size()]);
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public void setAccount(Account account) {
-		this.account = account;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public void setStatus(CharacterStatus status) {
-		this.status = status;
-	}
-
-	public void setMission(Mission mission) {
-		this.mission = mission;
 	}
 
 	public void setSkills(CharacterSkill[] skills) {

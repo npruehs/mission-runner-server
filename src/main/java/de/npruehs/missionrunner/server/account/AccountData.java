@@ -1,40 +1,21 @@
 package de.npruehs.missionrunner.server.account;
 
+import lombok.Getter;
+import lombok.Setter;
+
 public class AccountData {
+	@Getter
 	private String id;
+	
+	@Getter
+	@Setter
 	private String name;
+	
+	@Getter
+	@Setter
 	private int level;
+	
+	@Getter
+	@Setter
 	private int score;
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public int getLevel() {
-		return level;
-	}
-
-	public void setLevel(int level) {
-		this.level = level;
-	}
-
-	public int getScore() {
-		return score;
-	}
-
-	public void setScore(int score) {
-		this.score = score;
-	}
 }

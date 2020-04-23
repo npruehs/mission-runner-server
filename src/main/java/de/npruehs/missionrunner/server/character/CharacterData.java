@@ -1,10 +1,26 @@
 package de.npruehs.missionrunner.server.character;
 
+import lombok.Getter;
+import lombok.Setter;
+
 public class CharacterData {
+	@Getter
     private long id;
+	
+	@Getter
+	@Setter
     private String name;
+	
+	@Getter
+	@Setter
     private CharacterStatus status;
+	
+	@Getter
+	@Setter
     private long missionId;
+	
+	@Getter
+	@Setter
     private CharacterSkill[] skills;
     
     public CharacterData() {
@@ -17,44 +33,4 @@ public class CharacterData {
     	this.missionId = character.getMission() != null ? character.getMission().getId() : 0L;
     	this.skills = character.getSkills();
     }
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public CharacterStatus getStatus() {
-		return status;
-	}
-
-	public void setStatus(CharacterStatus status) {
-		this.status = status;
-	}
-
-	public long getMissionId() {
-		return missionId;
-	}
-
-	public void setMissionId(long missionId) {
-		this.missionId = missionId;
-	}
-
-	public CharacterSkill[] getSkills() {
-		return skills;
-	}
-
-	public void setSkills(CharacterSkill[] skills) {
-		this.skills = skills;
-	}
 }
