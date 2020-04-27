@@ -8,6 +8,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
 import org.springframework.core.env.Environment;
@@ -18,6 +19,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import com.google.common.base.Predicates;
 
 import de.npruehs.missionrunner.server.analytics.AnalyticsEventSender;
+import de.npruehs.missionrunner.server.analytics.AnalyticsService;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -28,6 +30,7 @@ import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
+@EnableFeignClients
 @EnableSwagger2
 public class ServerApplication {
 	@Autowired
@@ -45,6 +48,8 @@ public class ServerApplication {
  
         return dataSource;
     }
+	@Autowired
+    private AnalyticsService analyticsService;
 	
 	@Bean
 	public ModelMapper modelMapper() {
@@ -78,7 +83,7 @@ public class ServerApplication {
 	
 	@Bean
 	public AnalyticsEventSender analyticsEventSender() {
-		return new AnalyticsEventSender();
+		return new AnalyticsEventSender(analyticsService);
 	}
 	
 	public static void main(String[] args) {
