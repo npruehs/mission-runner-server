@@ -36,7 +36,7 @@ public class Mission {
     @Setter
     private MissionStatus status;
 
-    @Convert(converter = MissionRequirementJpaConverter.class)
+    @Convert(converter = MissionRequirementListJpaConverter.class)
     private ArrayList<MissionRequirement> requirements;
 
     @Getter

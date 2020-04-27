@@ -42,7 +42,7 @@ public class Character {
 	@Setter
     private Mission mission;
 
-    @Convert(converter = CharacterSkillJpaConverter.class)
+    @Convert(converter = CharacterSkillListJpaConverter.class)
     private ArrayList<CharacterSkill> skills;
 
     public Character() {
